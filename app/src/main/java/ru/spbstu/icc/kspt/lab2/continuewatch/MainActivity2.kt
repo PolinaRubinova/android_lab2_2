@@ -15,7 +15,7 @@ class MainActivity2 : AppCompatActivity() {
     var backgroundThread = Thread {
         while (true) {
             textSecondsElapsed.post {
-                textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
             }
             Thread.sleep(1000)
         }
@@ -29,17 +29,17 @@ class MainActivity2 : AppCompatActivity() {
         backgroundThread.start()
     }
 
+    override fun onResume() {
+        visibility = true
+        secondsElapsed = sharedPref.getInt("SEC", 0)
+        super.onResume()
+    }
+
     override fun onStop() {
         visibility = false
         val editor = sharedPref.edit()
         editor.putInt("SEC", secondsElapsed)
         editor.apply()
         super.onStop()
-    }
-
-    override fun onResume() {
-        visibility = true
-        secondsElapsed = sharedPref.getInt("SEC", 0)
-        super.onResume()
     }
 }

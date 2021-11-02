@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         while (true) {
             if (visibility) {
                 textSecondsElapsed.post {
-                    textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                    textSecondsElapsed.text = getString(R.string.sec_elapsed, secondsElapsed++)
+                    //textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
                 }
                 Thread.sleep(1000)
             }
